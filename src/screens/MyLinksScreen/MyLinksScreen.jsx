@@ -1,6 +1,5 @@
 import React from "react";
-import colors from "../../styles/colors";
-import MyStatusBar from "../../components/MyStatusBar";
+import MyStatusBar from "../../components/MyStatusBar/MyStatusBar";
 import { Container } from "./styles";
 
 export default function MyLinksScreen() {

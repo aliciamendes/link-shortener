@@ -7,6 +7,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Modal,
 } from "react-native";
 import {
   ContainerLogo,
@@ -21,12 +22,16 @@ import {
   ButtonText,
 } from "./styles";
 import logo from "../../assets/logo.png";
-import MyStatusBar from "../../components/MyStatusBar";
+import MyStatusBar from "../../components/MyStatusBar/MyStatusBar";
+import ModalLink from "../../components/ModalLink/ModalLink";
 
 export default function MainScreen() {
   const [link, setLink] = useState("");
+  const [modal, setModal] = useState(false);
 
-  function handleShort() {}
+  function handleShort() {
+    setModal(true);
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -72,6 +77,10 @@ export default function MainScreen() {
             </Button>
           </ContainerContent>
         </KeyboardAvoidingView>
+
+        <Modal visible={modal} transparent animationType="slide">
+          <ModalLink onClose={() => setModal(false)} />
+        </Modal>
       </LinearGradient>
     </TouchableWithoutFeedback>
   );
