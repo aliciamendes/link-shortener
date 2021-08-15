@@ -26,6 +26,7 @@ import logo from "../../assets/logo.png";
 import MyStatusBar from "../../components/MyStatusBar/MyStatusBar";
 import ModalLink from "../../components/ModalLink/ModalLink";
 import api from "../../services/api";
+import { saveLink } from "../../utils/storeLinks";
 
 export default function MainScreen() {
   const [link, setLink] = useState("");
@@ -41,8 +42,9 @@ export default function MainScreen() {
       });
 
       setData(response.data);
-
       setModal(true);
+
+      saveLink("linkShortenerLinks", response.data);
 
       Keyboard.dismiss();
       setLoading(false);

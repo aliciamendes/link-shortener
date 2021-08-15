@@ -14,3 +14,12 @@ export const Item = styled.Text`
   font-size: 16px;
   text-align: center;
 `;
+
+export const DeleteContainer = styled.TouchableOpacity`
+  background-color: #f55775;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 10px;
+  width: 18%;
+  border-radius: 50px;
+`;

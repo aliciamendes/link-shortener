@@ -14,3 +14,13 @@ export const Title = styled.Text`
   color: #fff;
 `;
 export const ListLink = styled.FlatList``;
+
+export const ContainerEmpty = styled.View`
+  margin-top: 15%;
+  align-items: center;
+`;
+
+export const AlertText = styled.Text`
+  color: #fff;
+  font-size: 18px;
+`;

@@ -1,15 +1,25 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { Container, Item } from "./styles";
+import { DeleteContainer, Container, Item } from "./styles";
+import { Swipeable } from "react-native-gesture-handler";
 
-export default function ListItem() {
+export default function ListItem({ data, selected, deleted }) {
+  function actions() {
+    return (
+      <DeleteContainer onPress={() => deleted(data.id)}>
+        <Feather name="trash" color="#fff" size={20} />
+      </DeleteContainer>
+    );
+  }
   return (
     <View>
-      <Container activeOpacity={0.9} onPress={() => {}}>
-        <Feather name="link" color="#FFF" size={24} />
-        <Item numberOfLines={1}>www.amskdlds.com</Item>
-      </Container>
+      <Swipeable renderRightActions={actions}>
+        <Container activeOpacity={0.9} onPress={() => selected(data)}>
+          <Feather name="link" color="#FFF" size={24} />
+          <Item numberOfLines={1}>{data.long_url}</Item>
+        </Container>
+      </Swipeable>
     </View>
   );
 }
