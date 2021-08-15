@@ -9,7 +9,7 @@ const Tab = createBottomTabNavigator();
 export function Routes() {
   return (
     <Tab.Navigator
-      initialRouteName="MainScreen"
+      initialRouteName="MyLinksScreen"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: "#08B4EA",
