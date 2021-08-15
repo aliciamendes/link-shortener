@@ -5,7 +5,6 @@ import {
   View,
   Share,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import {
   Modal,
   Container,
@@ -16,15 +15,18 @@ import {
   Shortener,
   ShortLink,
 } from "./styles";
+import { Feather } from "@expo/vector-icons";
+import { setString } from "expo-clipboard";
 
-export default function ModalLink({ onClose }) {
-  function copyLink() {
+export default function ModalLink({ onClose, data }) {
+  function handleCopyLink() {
+    setString(data.link);
     alert("foi");
   }
   async function handleShare() {
     try {
       const res = await Share.share({
-        message: ``,
+        message: `Aqui seu link: ${data.link}`,
       });
 
       if (res.action === Share.sharedAction) {
@@ -58,10 +60,10 @@ export default function ModalLink({ onClose }) {
 
         <AreaLink>
           <Title>Link Encurtado</Title>
-          <TextUrl numberOfLines={1}>link por extenso</TextUrl>
-          <Shortener activeOpacity={1} onPress={copyLink}>
-            <ShortLink numberOfLines={1}>link encurtado</ShortLink>
-            <TouchableOpacity onPress={copyLink}>
+          <TextUrl numberOfLines={1}>{data.long_url}</TextUrl>
+          <Shortener activeOpacity={1} onPress={handleCopyLink}>
+            <ShortLink numberOfLines={1}>{data.link}</ShortLink>
+            <TouchableOpacity onPress={handleCopyLink}>
               <Feather name="copy" size={26} color="white" />
             </TouchableOpacity>
           </Shortener>

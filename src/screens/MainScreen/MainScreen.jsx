@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import {
   ContainerLogo,
@@ -24,13 +25,36 @@ import {
 import logo from "../../assets/logo.png";
 import MyStatusBar from "../../components/MyStatusBar/MyStatusBar";
 import ModalLink from "../../components/ModalLink/ModalLink";
+import api from "../../services/api";
 
 export default function MainScreen() {
   const [link, setLink] = useState("");
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({});
 
-  function handleShort() {
-    setModal(true);
+  async function handleShort() {
+    setLoading(true);
+    try {
+      const response = await api.post("/shorten", {
+        long_url: link,
+      });
+
+      setData(response.data);
+
+      setModal(true);
+
+      Keyboard.dismiss();
+      setLoading(false);
+      setLink("");
+    } catch {
+      alert("erro");
+      Keyboard.dismiss();
+      setLink("");
+      setLoading(false);
+    }
+
+    // setModal(true);
   }
 
   return (
@@ -73,13 +97,17 @@ export default function MainScreen() {
             </ContainerInput>
 
             <Button onPress={handleShort}>
-              <ButtonText>Gerar Link</ButtonText>
+              {loading ? (
+                <ActivityIndicator color="#121212" size={24} />
+              ) : (
+                <ButtonText>Gerar Link</ButtonText>
+              )}
             </Button>
           </ContainerContent>
         </KeyboardAvoidingView>
 
         <Modal visible={modal} transparent animationType="slide">
-          <ModalLink onClose={() => setModal(false)} />
+          <ModalLink onClose={() => setModal(false)} data={data} />
         </Modal>
       </LinearGradient>
     </TouchableWithoutFeedback>
