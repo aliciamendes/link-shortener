@@ -1,15 +1,48 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MainScreen from "../screens/MainScreen";
-import MyLinksScreen from "../screens/MyLinksScreen";
+import MainScreen from "../screens/MainScreen/MainScreen";
+import MyLinksScreen from "../screens/MyLinksScreen/MyLinksScreen";
+import { Feather } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
 export function Routes() {
   return (
-    <Tab.Navigator initialRouteName="MainScreen">
-      <Tab.Screen name="MainScreen" component={MainScreen} />
-      <Tab.Screen name="MyLinksScreen" component={MyLinksScreen} />
+    <Tab.Navigator
+      initialRouteName="MainScreen"
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#08B4EA",
+        tabBarInactiveTintColor: "#A7A7A7",
+        tabBarIconStyle: {
+          marginTop: 10,
+        },
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          position: "absolute",
+        },
+      }}
+    >
+      <Tab.Screen
+        name="MainScreen"
+        component={MainScreen}
+        options={{
+          title: "",
+          tabBarIcon: ({ size, color }) => (
+            <Feather name="link" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MyLinksScreen"
+        component={MyLinksScreen}
+        options={{
+          title: "",
+          tabBarIcon: ({ size, color }) => (
+            <Feather name="folder" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
