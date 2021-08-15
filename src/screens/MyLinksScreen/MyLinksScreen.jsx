@@ -1,29 +1,23 @@
 import React from "react";
-import ListLink from "../../components/ListLinks/ListLink";
+import ListItem from "../../components/ListItem/ListItem";
 import MyStatusBar from "../../components/MyStatusBar/MyStatusBar";
 import colors from "../../styles/colors";
-import { Container, Title, List } from "./styles";
+import { Container, Title, ListLink } from "./styles";
 
 export default function MyLinksScreen() {
   return (
     <Container>
       <MyStatusBar
         barStyle="light-content"
-        backgroundColor={colors.linearTwo}
+        backgroundColor={colors.backgroundTwo}
       />
       <Title>Meus Links</Title>
 
-      <List
-        data={{ id: 1, link: "asd" }}
+      <ListLink
+        data={[{ id: 1, link: "asdad" }]}
         keyExtractor={(item) => String(item.id)}
-        renderIrem={({ item }) => (
-          <ListLink
-            data={item}
-            contentContainerStyle={{ paddingBottom: 20 }}
-            showVerticalScrollIndicator={false}
-          />
-        )}
-      ></List>
+        renderItem={({ item }) => <ListItem data={item} />}
+      ></ListLink>
     </Container>
   );
 }
